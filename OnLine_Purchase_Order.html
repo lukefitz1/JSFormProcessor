@@ -1,0 +1,175 @@
+<html>
+<head>
+<!--Luke Fitzgerald-->
+<title>Purchase Order</title>	
+<script language="JavaScript" type="text/javascript">
+	function check_state(stateIn) {
+		if (stateIn.length != 2) {
+			alert("State must be the 2 digit abbreviation (i.e. SC, NC, KS)");
+			document.purchaseOrder.state.focus();
+			return false;
+		}
+	}
+</script>
+<script language="JavaScript" type="text/javascript">
+	function check_zip(zipIn) {
+		if (zipIn.length != 5) {
+			alert("Zip code must be 5 digits long");
+			document.purchaseOrder.zipcode.focus();	
+			return false;
+		}	
+	}
+</script>	
+<script language="JavaScript" type="text/javascript">
+	function check_phone(phoneIn) {
+		if (phoneIn.length	!= 10) {
+			alert("Phone numbers must be 10 digits long");
+			document.purchaseOrder.phone.focus();	
+			return false;
+		}
+	}
+</script>	
+<script language="JavaScript" type="text/javascript">
+	function check_card(cardIn) {
+		if (cardIn.length != 16) {
+			alert("You must enter a 16 digit card number");
+			document.purchaseOrder.creditcardnum.focus();
+			return false;
+		}
+	}
+</script>	
+<script language="JavaScript" type="text/javascript">
+	function validation() {
+		if (document.purchaseOrder.fname.value == "First Name" || document.purchaseOrder.fname.value == "") {
+			alert("You must enter your first name");
+			document.purchaseOrder.fname.focus();
+			return false;
+		}
+		if (document.purchaseOrder.lname.value == "Last Name" || document.purchaseOrder.lname.value == "") {
+			alert("You must enter your last name");
+			document.purchaseOrder.lname.focus();
+			return false;
+		}
+		if (document.purchaseOrder.address1.value == "Address 1" || document.purchaseOrder.address1.value == "") {
+			alert("You must enter an address");
+			document.purchaseOrder.address1.focus();
+			return false;
+		}
+		if (document.purchaseOrder.city.value == "City" || document.purchaseOrder.city.value == "") {
+			alert("You must enter a city");
+			document.purchaseOrder.city.focus();
+			return false;
+		}
+		if (document.purchaseOrder.state.value == "State" || document.purchaseOrder.state.value == "") {
+			alert("You must enter a state");
+			document.purchaseOrder.state.focus();
+			return false;
+		}
+		if (document.purchaseOrder.zipcode.value == "Zip" || document.purchaseOrder.zipcode.value == "") {
+			alert("You must enter a zip code");
+			document.purchaseOrder.zipcode.focus();
+			return false;
+		}
+		if (document.purchaseOrder.phone.value == "Phone" || document.purchaseOrder.phone.value == "") {
+			alert("You must enter a phone number");
+			document.purchaseOrder.phone.focus();
+			return false;
+		}
+		if (document.purchaseOrder.creditcardnum.value == "Card Number" || document.purchaseOrder.creditcardnum.value == "") {
+			alert("You must enter a credit card number");
+			document.purchaseOrder.creditcardnum.focus();
+			return false;
+		}
+		if (document.purchaseOrder.creditcard.value == "") {
+			alert("Please pick a credit card");
+			return false;
+		}
+		if (document.purchaseOrder.month.selectedIndex == "") {
+			alert("Please choose the expiration month");
+			return false;
+		}
+		if (document.purchaseOrder.year.selectedIndex == "") {
+			alert("Please choose the expiration year");
+			return false;
+		}
+		if ((document.purchaseOrder.creditcard[0].checked == false) && (document.purchaseOrder.creditcard[1].checked == false) && 	
+		(document.purchaseOrder.creditcard[2].checked == false)) {
+			alert("Please choose a credit card option");
+			return false;
+		}
+	}
+</script>
+</head>
+
+<body>
+<h1>Purchase Order</h1>
+<h2>Products</h2>
+<form name="purchaseOrder" action="FormProcessor.html" method="get" onsubmit="return validation();">
+Hand Tools
+	<select name="hand_tools">
+		<option disabled="disabled" selected>Hand Tools</option>
+		<option value="saw">Saw</option>
+		<option value="hammer">Hammer</option>
+		<option value="screwdriver">Screwdriver</option>
+		<option value="wrench">Wrench</option>
+		<option value="pliers">Pliers</option>
+	</select>
+Power Tools
+	<select name="power_tools">
+		<option disabled="disabled" selected>Power Tools</option>
+		<option value="circularsaw">Circular Saw</option>
+		<option value="sabresaw">Sabre Saw</option>
+		<option value="drill">Drill</option>
+		<option value="beltsander">Belt Sander</option>
+		<option value="tablesaw">Table Saw</option>
+	</select>
+Building Materials
+	<select name="materials">
+		<option disabled="disabled" selected>Materials</option>
+		<option value="plywood">Plywood</option>
+		<option value="shingles">Shingles</option>
+		<option value="nails">Nails</option>
+		<option value="screws">Screws</option>
+	</select>
+<h2>Customer Information</h2>
+First Name: <input type="textfield" name="fname" value="First Name">Last Name: <input type="textfield" name="lname" value="Last Name"><br><br>
+Street Address 1: <input type="textfield" name="address1" size="45" value="Address 1"><br><br>
+Street Address 2: <input type="textfield" name="address2" size="45" value="Address 2"><br><br>
+City: <input type="textfield" name="city" value="City">State: <input type="textfield" name="state" onBlur="check_state(this.value);" value="State">
+	Zip: <input type="textfield" name="zipcode" maxlength="5" onBlur="check_zip(this.value);" value="Zip"><br><br>
+Phone: <input type="textfield" name="phone" maxlength="10" onBlur="check_phone(this.value);" value="Phone">Fax: <input type="textfield" name="fax" maxlength="10" value="Fax"><br><br>
+Payment Method? <input type="radio" name="creditcard" value="visa" />Visa
+				<input type="radio" name="creditcard" value="mastercard" />MasterCard
+				<input type="radio" name="creditcard" value="americanexpress" />American Express<br><br>
+Credit Card Number: <input type="textfield" name="creditcardnum" size="45" maxlength="16" onBlur="check_card(this.value);" value="Card Number"><br><br>
+Expiration Month
+	<select id="month" name="month">
+		<option disabled="disabled" selected>Month</option>
+		<option value="jan">01</option>
+		<option value="feb">02</option>
+		<option value="mar">03</option>
+		<option value="apr">04</option>
+		<option value="may">05</option>
+		<option value="jun">06</option>
+		<option value="jul">07</option>
+		<option value="aug">08</option>
+		<option value="sep">09</option>
+		<option value="oct">10</option>
+		<option value="nov">11</option>
+		<option value="dec">12</option>
+	</select>
+Expiration Year
+	<select id="year" name="year">
+		<option disabled="disabled" selected>Year</option>
+		<option value="2010">2010</option>
+		<option value="2011">2011</option>
+		<option value="2012">2012</option>
+		<option value="2013">2013</option>
+		<option value="2014">2014</option>
+		<option value="2015">2015</option>
+	</select>
+<br><br>
+<input type="submit" value="Submit Order">
+</form>
+</body>
+</html>
